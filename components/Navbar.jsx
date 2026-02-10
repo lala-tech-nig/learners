@@ -1,15 +1,24 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
 
     const toggleMenu = () => setIsOpen(!isOpen);
     const closeMenu = () => setIsOpen(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const navLinks = [
         { href: '#home', label: 'Home' },
@@ -19,13 +28,13 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 glass-dark">
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
             <div className="container">
-                <div className="flex items-center justify-between h-20">
+                <div className="flex items-center justify-between">
                     {/* Logo */}
-                    <Link href="/" className="text-2xl font-bold" style={{ fontFamily: 'var(--font-heading)' }}>
-                        <span className="gradient-text">Learners</span>
-                        <span className="text-white">Hub</span>
+                    <Link href="/" className="text-2xl font-bold tracking-tight flex items-center gap-2" style={{ fontFamily: 'var(--font-heading)' }}>
+                        <div className="w-8 h-8 bg-[#ff6b35] rounded-lg flex items-center justify-center text-white text-lg">L</div>
+                        <span className="text-gray-900">Learners</span>
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -34,7 +43,7 @@ export default function Navbar() {
                             <a
                                 key={link.href}
                                 href={link.href}
-                                className="text-white hover:text-[#ff6b35] transition-colors duration-300 font-medium"
+                                className="text-gray-600 hover:text-[#ff6b35] transition-colors duration-300 font-medium text-sm"
                             >
                                 {link.label}
                             </a>
@@ -44,10 +53,10 @@ export default function Navbar() {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={toggleMenu}
-                        className="md:hidden text-white p-2 hover:text-[#ff6b35] transition-colors"
+                        className="md:hidden text-gray-900 p-2 hover:bg-gray-100 rounded-lg transition-colors"
                         aria-label="Toggle menu"
                     >
-                        {isOpen ? <X size={28} /> : <Menu size={28} />}
+                        {isOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
             </div>
@@ -62,8 +71,7 @@ export default function Navbar() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={closeMenu}
-                            className="fixed inset-0 bg-black/80 md:hidden"
-                            style={{ top: '80px' }}
+                            className="fixed inset-0 bg-black/50 z-40 md:hidden"
                         />
 
                         {/* Menu Panel */}
@@ -72,9 +80,16 @@ export default function Navbar() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed right-0 top-20 bottom-0 w-64 bg-[#0a0a0a] md:hidden"
+                            className="fixed right-0 top-0 bottom-0 w-[280px] bg-white z-50 md:hidden shadow-2xl p-6 flex flex-col"
                         >
-                            <div className="flex flex-col p-6 gap-6">
+                            <div className="flex items-center justify-between mb-8">
+                                <span className="font-bold text-xl">Menu</span>
+                                <button onClick={closeMenu} className="p-2 hover:bg-gray-100 rounded-full">
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            <div className="flex flex-col gap-4">
                                 {navLinks.map((link, index) => (
                                     <motion.a
                                         key={link.href}
@@ -83,7 +98,7 @@ export default function Navbar() {
                                         initial={{ opacity: 0, x: 20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: index * 0.1 }}
-                                        className="text-white text-lg hover:text-[#ff6b35] transition-colors duration-300 font-medium"
+                                        className="text-gray-800 text-lg hover:text-[#ff6b35] transition-colors duration-300 font-medium py-2 border-b border-gray-50"
                                     >
                                         {link.label}
                                     </motion.a>

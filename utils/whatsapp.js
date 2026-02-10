@@ -1,55 +1,29 @@
-/**
- * WhatsApp Integration Utilities
- * Generates WhatsApp deep links with pre-filled messages
- */
+export const CONTACT_NUMBER = '+2348121444306';
 
-const WHATSAPP_NUMBER = '2348121444306';
+export const generateEnrollmentLink = (course) => {
+    const message = `Hey there, am interested in this course:
+  
+Title: ${course.title}
+Code: ${course.courseCode}
+Cost: ₦${course.cost.toLocaleString()}
+Link: ${window.location.origin}/courses/${course.id} (Ref Image)
 
-/**
- * Generate WhatsApp enrollment link for a specific course
- * @param {Object} course - Course object containing course details
- * @returns {string} WhatsApp URL with pre-filled message
- */
-export function generateEnrollmentLink(course) {
-    const message = `Hey there, I'm interested in this course:
+Please connect me with the instructor.`;
 
-📚 *${course.title}*
-🔢 Course Code: ${course.courseCode}
-💰 Price: ₦${course.cost.toLocaleString()}
-⏱️ Duration: ${course.duration}
+    return `https://wa.me/${CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
+};
 
-I'd love to learn more about enrollment and start my personalized learning journey!`;
+export const generateInstructorLink = () => {
+    const message = "Hey there, am interested in becoming an instructor at Learners.";
+    return `https://wa.me/${CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
+};
 
-    const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-}
+export const generateContactLink = () => {
+    const message = "Hello, I have an inquiry about Learners.";
+    return `https://wa.me/${CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
+};
 
-/**
- * Generate WhatsApp link for instructor signup
- * @returns {string} WhatsApp URL with pre-filled message
- */
-export function generateInstructorLink() {
-    const message = `Hey there, I'm interested in becoming an instructor on your platform!
-
-I'd like to know more about:
-- Requirements to join
-- Course creation process
-- Compensation structure
-- Support provided
-
-Looking forward to hearing from you!`;
-
-    const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-}
-
-/**
- * Generate general contact WhatsApp link
- * @param {string} customMessage - Optional custom message
- * @returns {string} WhatsApp URL
- */
-export function generateContactLink(customMessage = '') {
-    const message = customMessage || 'Hello! I have a question about LearnersHub.';
-    const encodedMessage = encodeURIComponent(message);
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-}
+export const generateRequestConceptLink = () => {
+    const message = "Hey there, I didn't find the course or concept I'm interested in. I'd like to request a specific topic/logic to learn.";
+    return `https://wa.me/${CONTACT_NUMBER}?text=${encodeURIComponent(message)}`;
+};

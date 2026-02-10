@@ -1,35 +1,19 @@
-import { Inter, Outfit } from "next/font/google";
-import "./globals.css";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-});
+import './globals.css';
 
 export const metadata = {
-  title: "LearnersHub - Personalized 1-on-1 Learning Platform",
-  description: "Experience the power of one-on-one learning. Connect with expert instructors for personalized courses tailored to your goals. No pre-recorded videos, just live, interactive sessions.",
-  keywords: "one-on-one learning, personalized education, live courses, expert instructors, online learning platform",
-  openGraph: {
-    title: "LearnersHub - Personalized 1-on-1 Learning",
-    description: "Master new skills with personalized one-on-one instruction from expert teachers.",
-    type: "website",
-  },
+  title: 'Learners - Master Any Concept',
+  description: '1-on-1 mentorship to master any concept or logic.',
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} antialiased`}>
-        {children}
-      </body>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet" />
+      </head>
+      <body>{children}</body>
     </html>
   );
 }

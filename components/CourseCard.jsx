@@ -1,59 +1,66 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Clock, BarChart, Tag } from 'lucide-react';
+import { Clock, ArrowRight, Tag } from 'lucide-react';
 
 export default function CourseCard({ course, onClick }) {
     return (
         <motion.div
             whileHover={{ y: -5 }}
             onClick={onClick}
-            className="bg-white rounded-2xl overflow-hidden shadow-lg cursor-pointer group border-2 border-transparent hover:border-[#ff6b35] transition-all duration-300"
+            className="card-clean group cursor-pointer h-full flex flex-col"
         >
-            {/* Thumbnail */}
-            <div className="relative h-48 bg-gradient-orange overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white text-6xl font-bold opacity-20" style={{ fontFamily: 'var(--font-heading)' }}>
-                        {course.courseCode}
-                    </div>
+            {/* Thumbnail - Clean & Minimal */}
+            <div className="relative h-48 bg-gray-100 overflow-hidden flex items-center justify-center p-6">
+                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100">
+                    <span className="text-[#ff6b35] font-bold text-xs uppercase tracking-wider">{course.level}</span>
                 </div>
-                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
-                    <span className="text-[#ff6b35] font-bold text-sm">{course.level}</span>
+
+                {/* Visual Representation (Text for now) */}
+                <div className="text-center">
+                    <div className="text-gray-300 text-6xl font-bold opacity-30 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
+                        {course.courseCode.substring(0, 3)}
+                    </div>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                        <h3 className="text-xl font-bold mb-2 group-hover:text-[#ff6b35] transition-colors" style={{ fontFamily: 'var(--font-heading)' }}>
-                            {course.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm">by {course.instructor.name}</p>
+            <div className="p-6 flex flex-col flex-grow">
+                <div className="mb-4 flex-grow">
+                    <div className="flex items-center gap-2 mb-2">
+                        <span className="bg-orange-50 text-[#ff6b35] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
+                            {course.category || 'Concept'}
+                        </span>
                     </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-[#ff6b35] transition-colors leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                        {course.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm">Instructor: <span className="font-semibold text-gray-700">{course.instructor.name}</span></p>
                 </div>
 
                 {/* Meta Info */}
-                <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
-                    <div className="flex items-center gap-1">
-                        <Clock size={16} />
+                <div className="flex items-center gap-4 text-xs font-medium text-gray-500 mb-6 py-4 border-t border-b border-gray-50">
+                    <div className="flex items-center gap-1.5">
+                        <Clock size={14} className="text-[#ff6b35]" />
                         <span>{course.duration}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <Tag size={16} />
+                    <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
+                    <div className="flex items-center gap-1.5">
+                        <Tag size={14} className="text-[#ff6b35]" />
                         <span>{course.courseCode}</span>
                     </div>
                 </div>
 
-                {/* Price */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                {/* Footer */}
+                <div className="flex items-center justify-between mt-auto">
                     <div>
-                        <div className="text-2xl font-bold text-[#ff6b35]">
+                        <div className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Per Session</div>
+                        <div className="text-lg font-bold text-gray-900 group-hover:text-[#ff6b35] transition-colors">
                             ₦{course.cost.toLocaleString()}
                         </div>
                     </div>
-                    <button className="bg-[#ff6b35] text-white px-6 py-2 rounded-full font-semibold hover:bg-[#e55a2b] transition-colors">
-                        View Details
+                    <button className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#ff6b35] group-hover:text-white transition-all duration-300">
+                        <ArrowRight size={18} />
                     </button>
                 </div>
             </div>

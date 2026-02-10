@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Facebook, Twitter, Instagram, Linkedin, Heart } from 'lucide-react';
 import { generateContactLink } from '@/utils/whatsapp';
 
 export default function Footer() {
@@ -21,18 +21,19 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="bg-[#0a0a0a] text-white pt-16 pb-8">
+        <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
             <div className="container">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                     {/* Brand */}
-                    <div>
-                        <h3 className="text-3xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-                            <span className="gradient-text">Learners</span>Hub
-                        </h3>
-                        <p className="text-gray-400 mb-6">
-                            Transforming education through personalized 1-on-1 learning experiences with expert instructors.
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-2">
+                            <div className="w-8 h-8 bg-[#ff6b35] rounded-lg flex items-center justify-center text-white font-bold">L</div>
+                            <span className="text-xl font-bold text-gray-900" style={{ fontFamily: 'var(--font-heading)' }}>Learners</span>
+                        </div>
+                        <p className="text-gray-500 leading-relaxed text-sm">
+                            The ultimate destination for 1-on-1 mentorship. We connect you with experts who can simplify any concept using your background as leverage.
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex gap-3">
                             {socialLinks.map((social) => {
                                 const Icon = social.icon;
                                 return (
@@ -40,9 +41,9 @@ export default function Footer() {
                                         key={social.label}
                                         href={social.href}
                                         aria-label={social.label}
-                                        className="w-10 h-10 bg-[#1a1a1a] rounded-full flex items-center justify-center hover:bg-[#ff6b35] transition-colors"
+                                        className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 hover:bg-[#ff6b35] hover:text-white transition-all duration-300"
                                     >
-                                        <Icon size={20} />
+                                        <Icon size={16} />
                                     </a>
                                 );
                             })}
@@ -51,13 +52,13 @@ export default function Footer() {
 
                     {/* Quick Links */}
                     <div>
-                        <h4 className="text-lg font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Quick Links</h4>
+                        <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Explore</h4>
                         <ul className="space-y-3">
                             {quickLinks.map((link) => (
                                 <li key={link.label}>
                                     <a
                                         href={link.href}
-                                        className="text-gray-400 hover:text-[#ff6b35] transition-colors"
+                                        className="text-gray-500 hover:text-[#ff6b35] transition-colors text-sm font-medium"
                                     >
                                         {link.label}
                                     </a>
@@ -66,60 +67,52 @@ export default function Footer() {
                         </ul>
                     </div>
 
-                    {/* Categories */}
+                    {/* Resources */}
                     <div>
-                        <h4 className="text-lg font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Categories</h4>
-                        <ul className="space-y-3 text-gray-400">
-                            <li>Web Development</li>
-                            <li>Design</li>
-                            <li>Data Science</li>
-                            <li>Marketing</li>
-                            <li>Mobile Development</li>
-                            <li>Cybersecurity</li>
+                        <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Legal</h4>
+                        <ul className="space-y-3 text-sm font-medium text-gray-500">
+                            <li><a href="#" className="hover:text-[#ff6b35] transition-colors">Privacy Policy</a></li>
+                            <li><a href="#" className="hover:text-[#ff6b35] transition-colors">Terms of Service</a></li>
+                            <li><a href="#" className="hover:text-[#ff6b35] transition-colors">Cookie Policy</a></li>
                         </ul>
                     </div>
 
                     {/* Contact */}
                     <div>
-                        <h4 className="text-lg font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Contact Us</h4>
-                        <ul className="space-y-4">
+                        <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-6">Contact</h4>
+                        <ul className="space-y-4 text-sm">
                             <li>
                                 <a
                                     href={generateContactLink()}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="flex items-center gap-3 text-gray-400 hover:text-[#ff6b35] transition-colors"
+                                    className="flex items-center gap-3 text-gray-500 hover:text-[#ff6b35] transition-colors"
                                 >
-                                    <MessageCircle size={20} />
-                                    <span>+234 812 144 4306</span>
+                                    <MessageCircle size={18} className="text-[#ff6b35]" />
+                                    <span className="font-medium">+234 812 144 4306</span>
                                 </a>
                             </li>
-                            <li className="flex items-center gap-3 text-gray-400">
-                                <Mail size={20} />
-                                <span>hello@learnershub.ng</span>
+                            <li className="flex items-center gap-3 text-gray-500">
+                                <Mail size={18} className="text-[#ff6b35]" />
+                                <span className="font-medium">hello@learnershub.ng</span>
                             </li>
-                            <li className="flex items-center gap-3 text-gray-400">
-                                <MapPin size={20} />
-                                <span>Lagos, Nigeria</span>
+                            <li className="flex items-center gap-3 text-gray-500">
+                                <MapPin size={18} className="text-[#ff6b35]" />
+                                <span className="font-medium">Lagos, Nigeria</span>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-gray-800">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-gray-400 text-sm">
-                            © {currentYear} LearnersHub. All rights reserved.
-                        </p>
-                        <div className="flex gap-6 text-sm">
-                            <a href="#" className="text-gray-400 hover:text-[#ff6b35] transition-colors">
-                                Privacy Policy
-                            </a>
-                            <a href="#" className="text-gray-400 hover:text-[#ff6b35] transition-colors">
-                                Terms of Service
-                            </a>
-                        </div>
+                <div className="pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                    <p>
+                        © {currentYear} Learners. All rights reserved.
+                    </p>
+                    <div className="flex items-center gap-1">
+                        <span>Made with</span>
+                        <Heart size={12} className="text-red-500 fill-red-500" />
+                        <span>for students everywhere</span>
                     </div>
                 </div>
             </div>

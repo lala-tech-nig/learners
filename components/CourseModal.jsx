@@ -1,12 +1,11 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Clock, BarChart, Tag, CheckCircle, User } from 'lucide-react';
+import { X, User, Clock, Calendar, CheckCircle, ArrowLeft, ArrowRight, Tag } from 'lucide-react';
 import { useEffect } from 'react';
 import { generateEnrollmentLink } from '@/utils/whatsapp';
 
 export default function CourseModal({ course, isOpen, onClose }) {
-    // Lock body scroll when modal is open
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -18,157 +17,139 @@ export default function CourseModal({ course, isOpen, onClose }) {
         };
     }, [isOpen]);
 
-    if (!course) return null;
-
     const handleEnroll = () => {
-        const whatsappLink = generateEnrollmentLink(course);
-        window.open(whatsappLink, '_blank');
+        const link = generateEnrollmentLink(course);
+        window.open(link, '_blank');
     };
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/80 z-50"
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
                     />
 
-                    {/* Modal */}
-                    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                            className="bg-white rounded-3xl max-w-4xl w-full my-8 relative"
-                            onClick={(e) => e.stopPropagation()}
-                        >
-                            {/* Close Button */}
+                    {/* Modal Container */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                        className="bg-white rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-y-auto relative z-50 shadow-2xl flex flex-col"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Header Image Area */}
+                        <div className="h-48 sm:h-64 bg-gray-50 relative shrink-0">
                             <button
                                 onClick={onClose}
-                                className="absolute top-6 right-6 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+                                className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 backdrop-blur rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors text-gray-700"
                             >
-                                <X size={24} />
+                                <X size={20} />
                             </button>
 
-                            {/* Header with Thumbnail */}
-                            <div className="h-64 bg-gradient-orange rounded-t-3xl relative overflow-hidden">
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="text-white text-8xl font-bold opacity-20" style={{ fontFamily: 'var(--font-heading)' }}>
-                                        {course.courseCode}
-                                    </div>
-                                </div>
-                                <div className="absolute bottom-6 left-6 right-6">
-                                    <div className="inline-block bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full mb-4">
-                                        <span className="text-[#ff6b35] font-bold text-sm">{course.level}</span>
-                                    </div>
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-heading)' }}>
-                                        {course.title}
-                                    </h2>
+                            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                                <div className="text-gray-200 text-9xl font-bold opacity-50 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
+                                    {course.courseCode.substring(0, 3)}
                                 </div>
                             </div>
 
-                            {/* Content */}
-                            <div className="p-6 md:p-8">
-                                {/* Instructor Info */}
-                                <div className="flex items-center gap-4 mb-6 pb-6 border-b border-gray-200">
-                                    <div className="w-16 h-16 bg-gradient-orange rounded-full flex items-center justify-center">
-                                        <User size={32} className="text-white" />
-                                    </div>
-                                    <div>
-                                        <div className="font-bold text-lg">{course.instructor.name}</div>
-                                        <div className="text-gray-600 text-sm">{course.instructor.bio}</div>
-                                    </div>
-                                </div>
+                            <div className="absolute bottom-6 left-6 right-6">
+                                <span className="inline-block bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[#ff6b35] font-bold text-xs uppercase tracking-wider mb-3 shadow-sm">
+                                    {course.level}
+                                </span>
+                                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                                    {course.title}
+                                </h2>
+                            </div>
+                        </div>
 
-                                {/* Meta Info Grid */}
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6 pb-6 border-b border-gray-200">
-                                    <div>
-                                        <div className="text-gray-500 text-sm mb-1">Duration</div>
-                                        <div className="font-bold flex items-center gap-1">
-                                            <Clock size={18} className="text-[#ff6b35]" />
-                                            {course.duration}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="text-gray-500 text-sm mb-1">Level</div>
-                                        <div className="font-bold flex items-center gap-1">
-                                            <BarChart size={18} className="text-[#ff6b35]" />
-                                            {course.level}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="text-gray-500 text-sm mb-1">Course Code</div>
-                                        <div className="font-bold flex items-center gap-1">
-                                            <Tag size={18} className="text-[#ff6b35]" />
-                                            {course.courseCode}
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="text-gray-500 text-sm mb-1">Category</div>
-                                        <div className="font-bold">{course.category}</div>
-                                    </div>
+                        {/* Content */}
+                        <div className="p-6 md:p-8 space-y-8">
+                            {/* Instructor */}
+                            <div className="flex items-center gap-4 pb-6 border-b border-gray-100">
+                                <div className="w-14 h-14 bg-orange-100 rounded-full flex items-center justify-center shrink-0">
+                                    <User size={24} className="text-[#ff6b35]" />
                                 </div>
-
-                                {/* Course Outline */}
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-                                        Course Outline
-                                    </h3>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                        {course.outline.map((item, index) => (
-                                            <div key={index} className="flex items-start gap-2">
-                                                <CheckCircle size={20} className="text-[#ff6b35] flex-shrink-0 mt-0.5" />
-                                                <span className="text-gray-700">{item}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Benefits */}
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>
-                                        What You'll Gain
-                                    </h3>
-                                    <div className="space-y-2">
-                                        {course.benefits.map((benefit, index) => (
-                                            <div key={index} className="flex items-start gap-2">
-                                                <CheckCircle size={20} className="text-green-500 flex-shrink-0 mt-0.5" />
-                                                <span className="text-gray-700">{benefit}</span>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Prerequisites */}
-                                <div className="mb-8 bg-gray-50 p-4 rounded-xl">
-                                    <h4 className="font-bold mb-2">Prerequisites</h4>
-                                    <p className="text-gray-700">{course.prerequisites}</p>
-                                </div>
-
-                                {/* Enroll Section */}
-                                <div className="bg-gradient-orange rounded-2xl p-6 text-white">
-                                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                                        <div>
-                                            <div className="text-sm opacity-90 mb-1">Investment in Your Future</div>
-                                            <div className="text-4xl font-bold">₦{course.cost.toLocaleString()}</div>
-                                        </div>
-                                        <button
-                                            onClick={handleEnroll}
-                                            className="bg-white text-[#ff6b35] px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all hover:scale-105 shadow-lg w-full md:w-auto"
-                                        >
-                                            Enroll via WhatsApp
-                                        </button>
-                                    </div>
+                                <div>
+                                    <h4 className="font-bold text-lg text-gray-900">{course.instructor.name}</h4>
+                                    <p className="text-gray-500 text-sm leading-snug">{course.instructor.bio}</p>
                                 </div>
                             </div>
-                        </motion.div>
-                    </div>
-                </>
+
+                            {/* Key Stats */}
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div className="bg-gray-50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 text-gray-500 mb-1 text-xs font-bold uppercase">
+                                        <Clock size={14} /> Duration
+                                    </div>
+                                    <div className="font-bold text-gray-900">{course.duration}</div>
+                                </div>
+                                <div className="bg-gray-50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 text-gray-500 mb-1 text-xs font-bold uppercase">
+                                        <Calendar size={14} /> Sessions
+                                    </div>
+                                    <div className="font-bold text-gray-900">{course.sessions} Classes</div>
+                                </div>
+                                <div className="bg-gray-50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 text-gray-500 mb-1 text-xs font-bold uppercase">
+                                        <Tag size={14} /> Code
+                                    </div>
+                                    <div className="font-bold text-gray-900">{course.courseCode}</div>
+                                </div>
+                            </div>
+
+                            {/* What You'll Learn & Benefits */}
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div>
+                                    <h3 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>What You'll Learn</h3>
+                                    <ul className="space-y-3">
+                                        {course.outline.map((item, i) => (
+                                            <li key={i} className="flex gap-3 text-gray-600">
+                                                <CheckCircle size={20} className="text-[#ff6b35] shrink-0 translate-y-0.5" />
+                                                <span className="text-sm leading-relaxed">{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-bold mb-4" style={{ fontFamily: 'var(--font-heading)' }}>Why This Course?</h3>
+                                    <p className="text-gray-600 leading-relaxed mb-6 text-sm">
+                                        This isn't just a generic course. {course.instructor.name} will tailor every explanation to your background, ensuring you grasp the logic behind {course.title} quickly and effectively.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Bottom Action Bar */}
+                            <div className="sticky bottom-0 -mx-6 -mb-6 md:-mx-8 md:-mb-8 p-6 md:p-8 bg-white border-t border-gray-100 flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div>
+                                    <div className="text-xs text-gray-400 font-bold uppercase tracking-wider">Per Session</div>
+                                    <div className="text-3xl font-bold text-gray-900">₦{course.cost.toLocaleString()}</div>
+                                </div>
+                                <div className="flex gap-3 w-full md:w-auto">
+                                    <button
+                                        onClick={onClose}
+                                        className="flex-1 md:flex-none btn-secondary !py-3 !px-6 flex items-center justify-center gap-2"
+                                    >
+                                        <ArrowLeft size={18} />
+                                        Back
+                                    </button>
+                                    <button
+                                        onClick={handleEnroll}
+                                        className="flex-1 md:flex-none btn-primary !py-3 !px-8 flex items-center justify-center gap-2"
+                                    >
+                                        Start Masterclass
+                                        <ArrowRight size={18} />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                </div>
             )}
         </AnimatePresence>
     );
