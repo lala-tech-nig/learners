@@ -9,6 +9,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 15000,
+        image: '/web_dev_course_1770743142604.png',
         outline: ['Understanding closure in hooks', 'Custom hooks design patterns', 'Performance optimization', 'Rules of hooks deep dive'],
     },
     {
@@ -21,6 +22,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 3,
         cost: 25000,
+        image: '/web_dev_course_1770743142604.png',
         outline: ['REST vs GraphQL', 'Database design for scale', 'Authentication & Authorization', 'Microservices patterns'],
     },
     {
@@ -33,6 +35,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 12000,
+        image: '/ui_ux_design_1770743161460.png',
         outline: ['Visual Hierarchy', 'Color Theory', 'Typography basics', 'Figma Pro tips'],
     },
     {
@@ -45,6 +48,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 1,
         cost: 10000,
+        image: '/web_dev_course_1770743142604.png',
         outline: ['Lexical Scope', 'Execution Context', 'Memory Management', 'Practical Closure Use Cases'],
     },
     {
@@ -57,6 +61,7 @@ export const courses = [
         duration: '2 Hours',
         sessions: 4,
         cost: 30000,
+        image: '/data_science_course_1770743181838.png',
         outline: ['Graph theory basics', 'BFS vs DFS', 'Shortest Path Algorithms', 'Real-world applications'],
     },
     {
@@ -69,6 +74,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 3,
         cost: 20000,
+        image: '/web_dev_course_1770743142604.png',
         outline: ['Server Components', 'Routing Patterns', 'Data Fetching', 'SEO Optimization'],
     },
     {
@@ -81,6 +87,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 3,
         cost: 18000,
+        image: '/data_science_course_1770743181838.png',
         outline: ['Python basics', 'Pandas & NumPy', 'Data Visualization', 'Intro to ML'],
     },
     {
@@ -93,6 +100,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 15000,
+        image: '/cybersecurity_course_1770743238179.png',
         outline: ['Network Security', 'Common Vulnerabilities', 'Encryption basics', 'Security Best Practices'],
     },
     {
@@ -105,6 +113,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 3,
         cost: 22000,
+        image: '/mobile_dev_course_1770743219489.png',
         outline: ['Expo framework', 'Native Components', 'Navigation', 'Publishing to Stores'],
     },
     {
@@ -117,6 +126,7 @@ export const courses = [
         duration: '2 Hours',
         sessions: 3,
         cost: 28000,
+        image: '/cybersecurity_course_1770743238179.png',
         outline: ['Docker Containers', 'GitHub Actions', 'AWS Basics', 'Automated Testing'],
     },
     {
@@ -129,6 +139,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 12000,
+        image: '/digital_marketing_course_1770743199650.png',
         outline: ['Product Lifecycle', 'User Research', 'Agile/Scrum', 'Roadmapping'],
     },
     {
@@ -141,6 +152,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 1,
         cost: 8000,
+        image: '/ui_ux_design_1770743161460.png',
         outline: ['Auto-layout basics', 'Responsive components', 'Complex nesting', 'Design systems'],
     },
     {
@@ -153,6 +165,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 2,
         cost: 20000,
+        image: '/data_science_course_1770743181838.png',
         outline: ['Indexing strategies', 'Query analyzing', 'Normalization', 'ACID properties'],
     },
     {
@@ -165,6 +178,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 16000,
+        image: '/cybersecurity_course_1770743238179.png',
         outline: ['How Blockchain works', 'Smart Contracts', 'Wallets', 'DeFi basics'],
     },
     {
@@ -177,6 +191,7 @@ export const courses = [
         duration: '1.5 Hours',
         sessions: 3,
         cost: 14000,
+        image: '/digital_marketing_course_1770743199650.png',
         outline: ['SEO Fundamentals', 'Social Media Ads', 'Content Strategy', 'Analytics'],
     },
     {
@@ -189,6 +204,7 @@ export const courses = [
         duration: '1 Hour',
         sessions: 2,
         cost: 13000,
+        image: '/web_dev_course_1770743142604.png',
         outline: ['Reactivity', 'Setup function', 'Lifecycle hooks', 'State Management'],
     },
     {
@@ -201,6 +217,7 @@ export const courses = [
         duration: '2 Hours',
         sessions: 4,
         cost: 35000,
+        image: '/data_science_course_1770743181838.png',
         outline: ['Linear Regression', 'Neural Networks', 'Model Training', 'Python scikit-learn'],
     },
     {
@@ -213,6 +230,7 @@ export const courses = [
         duration: '2 Hours',
         sessions: 3,
         cost: 40000,
+        image: '/cybersecurity_course_1770743238179.png',
         outline: ['Penetration Testing', 'Kali Linux', 'Exploit Frameworks', 'Reporting'],
     }
 ];

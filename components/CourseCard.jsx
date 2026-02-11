@@ -11,16 +11,25 @@ export default function CourseCard({ course, onClick }) {
             className="card-clean group cursor-pointer h-full flex flex-col"
         >
             {/* Thumbnail - Clean & Minimal */}
-            <div className="relative h-48 bg-gray-100 overflow-hidden flex items-center justify-center p-6">
-                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100">
-                    <span className="text-[#ff6b35] font-bold text-xs uppercase tracking-wider">{course.level}</span>
-                </div>
-
-                {/* Visual Representation (Text for now) */}
-                <div className="text-center">
-                    <div className="text-gray-300 text-6xl font-bold opacity-30 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
-                        {course.courseCode.substring(0, 3)}
+            {/* Thumbnail */}
+            <div className="relative h-48 bg-gray-100 overflow-hidden">
+                {course.image ? (
+                    <img
+                        src={course.image}
+                        alt={course.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                ) : (
+                    <div className="w-full h-full flex items-center justify-center p-6 bg-gray-100">
+                        <div className="text-center">
+                            <div className="text-gray-300 text-6xl font-bold opacity-30 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
+                                {course.courseCode.substring(0, 3)}
+                            </div>
+                        </div>
                     </div>
+                )}
+                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full shadow-sm border border-gray-100 z-10">
+                    <span className="text-[#ff6b35] font-bold text-xs uppercase tracking-wider">{course.level}</span>
                 </div>
             </div>
 
