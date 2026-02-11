@@ -94,7 +94,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-center gap-3 text-gray-500">
                                 <Mail size={18} className="text-[#ff6b35]" />
-                                <span className="font-medium">hello@learnershub.ng</span>
+                                <span className="font-medium">learners2026@gmail.com</span>
                             </li>
                             <li className="flex items-center gap-3 text-gray-500">
                                 <MapPin size={18} className="text-[#ff6b35]" />

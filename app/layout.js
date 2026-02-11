@@ -6,7 +6,7 @@ export const metadata = {
   openGraph: {
     title: 'Learners - Master Any Concept',
     description: '1-on-1 mentorship to master any concept or logic.',
-    url: 'https://learnershub.ng',
+    url: 'https://learners.vercel.app',
     siteName: 'Learners',
     images: [
       {
