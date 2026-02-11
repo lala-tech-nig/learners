@@ -53,16 +53,26 @@ export default function CourseModal({ course, isOpen, onClose }) {
                             </button>
 
                             <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-                                <div className="text-gray-200 text-9xl font-bold opacity-50 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
-                                    {course.courseCode.substring(0, 3)}
-                                </div>
+                                {course.image ? (
+                                    <img
+                                        src={course.image}
+                                        alt={course.title}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <div className="text-gray-200 text-9xl font-bold opacity-50 select-none" style={{ fontFamily: 'var(--font-heading)' }}>
+                                        {course.courseCode.substring(0, 3)}
+                                    </div>
+                                )}
+                                {/* Overlay for better text readability if image exists */}
+                                {course.image && <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />}
                             </div>
 
                             <div className="absolute bottom-6 left-6 right-6">
                                 <span className="inline-block bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[#ff6b35] font-bold text-xs uppercase tracking-wider mb-3 shadow-sm">
                                     {course.level}
                                 </span>
-                                <h2 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight" style={{ fontFamily: 'var(--font-heading)' }}>
+                                <h2 className={`text-2xl md:text-4xl font-bold leading-tight ${course.image ? 'text-white' : 'text-gray-900'}`} style={{ fontFamily: 'var(--font-heading)' }}>
                                     {course.title}
                                 </h2>
                             </div>
